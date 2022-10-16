@@ -4,13 +4,13 @@ using namespace std;
 
 #define f first
 #define s second
-#define size(x) x.size()
 #define all(x) begin(x), end(x)
 #define pb push_back
 #define endl "\n"
 #define each(x, xs)  for (auto &x : (xs))
 #define rep(i, be, en) for (__typeof(en) i = (be) - ((be) > (en)); i != (en) - ((be) > (en)); i += 1 - 2 * ((be) > (en)))
 typedef vector<int> vi;
+typedef long long ll;
 
 #ifdef LOCAL
     #include "debug.h"
@@ -29,33 +29,38 @@ void _() {
     #endif
 }
 
-#define int long long int
-
 void solve();
 
-int32_t main() {
+int main() {
     _();
     int T;
     T = 1;
-    // cin >> T;
+    cin >> T;
     rep (t, 0, T) { solve(); }
     return 0;
 }
 
 void solve() {
-    int n, m, e, b;
-    cin >> n >> m >> e >> b;
-    vector<pair<int, pair<int, int>>> vec(n);
-    set<int> res;
-    rep(i, 0, n) cin >> vec[i].f;
-    rep(i, 0, n) cin >> vec[i].s.s, vec[i].s.f = -i;
-    sort(all(vec));
-    rep(i, 0, m) res.insert(-vec.back().s.f + 1), vec.pop_back();
-    rep(i, 0, n) swap(vec[i].f, vec[i].s.s);
-    sort(all(vec));
-    rep(i, 0, e) res.insert(-vec.back().s.f + 1), vec.pop_back();
-    rep(i, 0, n) vec[i].f += vec[i].s.s;
-    sort(all(vec));
-    rep(i, 0, b) res.insert(-vec.back().s.f + 1), vec.pop_back();
-    each (n, res) cout << n << endl;
+    int l, q, odds = 0, evens = 0;
+    ll sum = 0;
+    cin >> l >> q;
+    rep (i, 0, l) {
+        int n;
+        cin >> n;
+        if (n&1) odds++;
+        else evens++;
+        sum += n;
+    }    
+    rep (i, 0, q) {
+        int odd, amn;
+        cin >> odd >> amn;
+        if (odd&1) {
+            sum += amn*odds;
+            if (amn&1) evens += odds, odds = 0;
+        } else {
+            sum += amn*evens;
+            if (amn&1) odds += evens, evens = 0;
+        }
+        cout << sum << endl;
+    }
 }

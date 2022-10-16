@@ -4,7 +4,6 @@ using namespace std;
 
 #define f first
 #define s second
-#define size(x) x.size()
 #define all(x) begin(x), end(x)
 #define pb push_back
 #define endl "\n"
@@ -37,25 +36,33 @@ int32_t main() {
     _();
     int T;
     T = 1;
-    // cin >> T;
+    cin >> T;
     rep (t, 0, T) { solve(); }
     return 0;
 }
 
 void solve() {
-    int n, m, e, b;
-    cin >> n >> m >> e >> b;
-    vector<pair<int, pair<int, int>>> vec(n);
-    set<int> res;
-    rep(i, 0, n) cin >> vec[i].f;
-    rep(i, 0, n) cin >> vec[i].s.s, vec[i].s.f = -i;
-    sort(all(vec));
-    rep(i, 0, m) res.insert(-vec.back().s.f + 1), vec.pop_back();
-    rep(i, 0, n) swap(vec[i].f, vec[i].s.s);
-    sort(all(vec));
-    rep(i, 0, e) res.insert(-vec.back().s.f + 1), vec.pop_back();
-    rep(i, 0, n) vec[i].f += vec[i].s.s;
-    sort(all(vec));
-    rep(i, 0, b) res.insert(-vec.back().s.f + 1), vec.pop_back();
-    each (n, res) cout << n << endl;
+    int n;
+    cin >> n;
+    string s = "";
+    string t = "";
+    rep (i, 0, n) {
+        int a, b;
+        string nw;
+        cin >> a >> b >> nw;
+        if (a == 2) {
+            rep (j, 0, b) {
+                t += nw;
+            }
+            sort(all(t), greater<>());
+        } else {
+            rep (j, 0, b) {
+                s += nw;
+            }
+            sort(all(s));
+        }
+        if (s < t) cout << "YES" << endl;
+        else cout << "NO" << endl;
+     
+    }
 }
