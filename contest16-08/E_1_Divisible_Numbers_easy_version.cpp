@@ -13,9 +13,11 @@ typedef vector<int> vi;
 typedef long long ll;
 
 #ifdef LOCAL
-    #include "debug.h"
+    #include "../debug.h"
+    #define line cerr << "-------------------" << endl;
 #else
     #define deb(x...)
+    #define line
 #endif
 
 void _() {
@@ -49,6 +51,7 @@ void solve() {
     else mx += 2;
     while (true) {
         deb(mx);
+        line;
         if (a*b % mx == 0) {
             int div = (int) a*b / mx;
             cout << mx << " " << div << endl;
